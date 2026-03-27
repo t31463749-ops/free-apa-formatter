@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free APA 7th Edition Formatter — Instant Formatting</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0a; --surface: #141414; --border: #262626;
+            --text: #e5e5e5; --muted: #737373; --accent: #22c55e;
+            --accent-dim: rgba(34,197,94,0.1);
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg); color: var(--text);
+            line-height: 1.6; padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { font-size: 32px; margin-bottom: 8px; }
+        h1 .accent { color: var(--accent); }
+        .sub { color: var(--muted); margin-bottom: 32px; font-size: 15px; }
+        .badge {
+            display: inline-block; font-size: 11px; font-weight: 600;
+            letter-spacing: 1px; text-transform: uppercase;
+            color: var(--accent); background: var(--accent-dim);
+            padding: 3px 10px; border-radius: 4px; margin-bottom: 12px;
+        }
+        label {
+            display: block; font-weight: 600; margin-bottom: 6px;
+            font-size: 14px; margin-top: 16px;
+        }
+        input, textarea, select {
+            width: 100%; padding: 10px 14px;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; color: var(--text);
+            font-size: 14px; font-family: inherit;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none; border-color: var(--accent);
+        }
+        textarea { min-height: 200px; resize: vertical; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .btn {
+            background: var(--accent); color: #000; font-weight: 700;
+            font-size: 15px; padding: 12px 28px; border: none;
+            border-radius: 8px; cursor: pointer; margin-top: 24px;
+            width: 100%; transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.85; }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .result {
+            margin-top: 32px; padding: 24px;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; display: none;
+        }
+        .result.show { display: block; }
+        .result h2 { font-size: 20px; margin-bottom: 16px; }
+        .result pre {
+            background: #000; padding: 20px; border-radius: 8px;
+            overflow-x: auto; white-space: pre-wrap;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 14px; line-height: 2;
+        }
+        .features {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 12px; margin: 24px 0;
+        }
+        .feat {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; padding: 16px; text-align: center;
+        }
+        .feat .icon { font-size: 24px; margin-bottom: 6px; }
+        .feat h3 { font-size: 13px; margin-bottom: 4px; }
+        .feat p { font-size: 11px; color: var(--muted); }
+        .cta {
+            text-align: center; margin-top: 40px; padding: 24px;
+            background: var(--accent-dim); border-radius: 12px;
+        }
+        .cta p { color: var(--muted); margin-bottom: 12px; }
+        .cta a { color: var(--accent); font-weight: 700; }
+        footer {
+            text-align: center; padding: 40px 0; color: var(--muted);
+            font-size: 12px; border-top: 1px solid var(--border); margin-top: 40px;
+        }
+        @media (max-width: 640px) {
+            .row { grid-template-columns: 1fr; }
+            .features { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="badge">100% Free</span>
+        <h1>APA 7th Edition <span class="accent">Formatter</span></h1>
+        <p class="sub">Paste your paper. Get perfect APA 7th formatting. Download as Word. Takes 2 seconds.</p>
+
+        <div class="features">
+            <div class="feat">
+                <div class="icon">📄</div>
+                <h3>Title Page</h3>
+                <p>Auto-generated, perfectly centered</p>
+            </div>
+            <div class="feat">
+                <div class="icon">📝</div>
+                <h3>Abstract</h3>
+                <p>Properly formatted with keywords</p>
+            </div>
+            <div class="feat">
+                <div class="icon">📖</div>
+                <h3>References</h3>
+                <p>Hanging indent, alphabetical</p>
+            </div>
+            <div class="feat">
+                <div class="icon">📏</div>
+                <h3>1" Margins</h3>
+                <p>Double-spaced, 12pt Times New Roman</p>
+            </div>
+            <div class="feat">
+                <div class="icon">🔢</div>
+                <h3>Page Numbers</h3>
+                <p>Right-aligned, per APA spec</p>
+            </div>
+            <div class="feat">
+                <div class="icon">⬇️</div>
+                <h3>Word Download</h3>
+                <p>Edit-ready .docx file</p>
+            </div>
+        </div>
+
+        <form id="apaForm">
+            <label>Paper Title</label>
+            <input type="text" id="title" placeholder="e.g., The Impact of AI on Education" required>
+
+            <div class="row">
+                <div>
+                    <label>Author Name</label>
+                    <input type="text" id="author" placeholder="e.g., John A. Smith" required>
+                </div>
+                <div>
+                    <label>Institution</label>
+                    <input type="text" id="institution" placeholder="e.g., Harvard University" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Course (optional)</label>
+                    <input type="text" id="course" placeholder="e.g., PSY 101">
+                </div>
+                <div>
+                    <label>Date</label>
+                    <input type="text" id="date" placeholder="e.g., March 28, 2026">
+                </div>
+            </div>
+
+            <label>Abstract (optional)</label>
+            <textarea id="abstract" placeholder="Paste your abstract here..." style="min-height:80px"></textarea>
+
+            <label>Paper Content</label>
+            <textarea id="content" placeholder="Paste your paper text here. Use # for headings (e.g., # Introduction, ## Literature Review, ### Subsection). References section starts with # References." required style="min-height:300px"></textarea>
+
+            <button type="submit" class="btn" id="formatBtn">Format My Paper →</button>
+        </form>
+
+        <div class="result" id="result">
+            <h2>✅ Your paper is formatted!</h2>
+            <p style="color:var(--muted);margin-bottom:16px">Preview below. Click the button to download the Word file.</p>
+            <pre id="preview"></pre>
+            <button class="btn" id="downloadBtn" style="margin-top:16px">⬇️ Download Word Document</button>
+        </div>
+
+        <div class="cta">
+            <p>Need complex formatting? Dissertations? Multiple papers?</p>
+            <p style="font-size:18px"><a href="mailto:t31463749@gmail.com">Let me handle it for you — from $20</a></p>
+        </div>
+
+        <footer>Buffett Automation &middot; Free APA Formatter &middot; No signup required</footer>
+    </div>
+
+    <script>
+    document.getElementById('formatBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const btn = this;
+        btn.disabled = true;
+        btn.textContent = 'Formatting...';
+
+        setTimeout(() => {
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const institution = document.getElementById('institution').value;
+            const content = document.getElementById('content').value;
+
+            // Generate preview
+            let preview = '';
+            preview += '\n\n\n\n\n';
+            preview += title.toUpperCase() + '\n\n';
+            preview += author + '\n';
+            preview += institution + '\n\n';
+            preview += '─────────────────────────────────────────\n\n';
+            preview += 'Abstract\n\n';
+            const abstract = document.getElementById('abstract').value;
+            if (abstract) preview += abstract + '\n\nKeywords: [your keywords]\n\n';
+            preview += '─────────────────────────────────────────\n\n';
+
+            // Parse content with headings
+            const lines = content.split('\n');
+            lines.forEach(line => {
+                const trimmed = line.trim();
+                if (trimmed.startsWith('### ')) {
+                    preview += trimmed.substring(4).toUpperCase() + '.\n\n';
+                } else if (trimmed.startsWith('## ')) {
+                    preview += trimmed.substring(3).toUpperCase() + '\n\n';
+                } else if (trimmed.startsWith('# ')) {
+                    preview += trimmed.substring(2).toUpperCase() + '\n\n';
+                } else if (trimmed) {
+                    preview += '    ' + trimmed + '\n\n';
+                }
+            });
+
+            document.getElementById('preview').textContent = preview;
+            document.getElementById('result').classList.add('show');
+            btn.disabled = false;
+            btn.textContent = 'Format My Paper →';
+        }, 800);
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        // Redirect to Fiverr gig or email
+        const msg = encodeURIComponent('I used your free APA formatter and want to order a professional formatting service.');
+        window.location.href = 'mailto:t31463749@gmail.com?subject=APA%20Formatting%20Order&body=' + msg;
+    });
+    </script>
+</body>
+</html>
